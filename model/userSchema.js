@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const JWT = require('jsonwebtoken')
+const bycrypt = require('bcrypt')
 
 const userSchema = new Schema({
     name: {
@@ -30,6 +31,14 @@ const userSchema = new Schema({
 },{
     timestamps: true 
 });
+
+userSchema.pre('save',async function(next) {
+    if(!this.isModified('password')){
+        return next() ;
+    }
+    this.password = await bycrypt.hash(this.password, 10); 
+    return next();
+})
 
 
 userSchema.methods = {

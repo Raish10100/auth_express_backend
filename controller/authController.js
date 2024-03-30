@@ -123,9 +123,57 @@ const signin = async (req, res, next) => {
   
 //  ! ----------------------  IMP field upper side -----------------------------------------------------------------------------
   
+
+//?------------------------  l3
+
+const getUser = async (req,res,next) => {
+      const userId = req.user.id ;
+
+      try{
+        const user = await userModel.findById(userId);
+        return res.status(200).json({
+          success : true,
+          data : user 
+        })
+      }
+      catch(e){
+        return res.status(400).json({
+          success : false,
+          message : e.message
+      })
+    }
+};
+
+
+const logout = (req,res) => {
+    try {
+      const cookieOption = {
+        expires : new Date(),
+        httpOnly : true 
+      }
+      res.cookie("token",null,cookieOption)
+      res.status(200).json({
+        success : true,
+        message : "Logged Out"
+      })
+    }
+    catch(e) {
+      res.status(400).json({
+        success : false,
+        message : e.message
+      })
+    }
+    
+}
+//?------------------------  l3
+
+
+
 // Exporting the 'signup' function as a property of an object.
 // This allows the 'signup' function to be imported individually from other modules.
 module.exports = {
   signup,
   signin,
+  getUser,
+  logout
 };

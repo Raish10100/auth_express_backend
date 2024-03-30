@@ -12,6 +12,7 @@ const authRouter = require('./router/authRouter');
 
 // ---------
 const databaseconnect = require('./config/databaseConfig');
+const cookieParser = require('cookie-parser')
 
 databaseconnect()
 // ---------
@@ -22,6 +23,8 @@ databaseconnect()
 // This middleware parses incoming request bodies with JSON payloads and populates the 'req.body' property with the parsed JSON data.
 //Parses incoming request bodies with JSON payloads: This middleware specifically targets requests that contain JSON data in their body. It takes the raw JSON data from the request body and parses it into a JavaScript object, making it easier for you to work with within your routes or other middleware.
 app.use(express.json());
+app.use(cookieParser());
+
 
 // Mounting the 'authRouter' middleware at the '/api/auth/' path.
 // This means that all routes defined in the 'authRouter' will be prefixed with '/api/auth/'.
