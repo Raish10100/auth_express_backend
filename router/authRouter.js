@@ -22,7 +22,7 @@ authRouter.post('/signin', signin);
 //------------------------  l3
 
 authRouter.get('/user',jwtAuth,getUser); //created to get information of user
-authRouter.get('/logout',jwtAuth,logout)
+authRouter.get('/logout',jwtAuth,logout);
 //------------------------  l3
 
 // Exporting the 'authRouter' instance, making it available for use in other parts of the application.
