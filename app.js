@@ -1,6 +1,14 @@
 const express = require('express');
 const app = express();
 const authRouter = require('./router/authRoute');
+//?-L2----------👇👇
+const databaseconnect = require('./config/databaseConfig');
+//?-L2----------👆👆
+
+
+//?-L2----------👇👇
+databaseconnect()
+//?-L2----------👆👆
 
 app.use(express.json())
 
