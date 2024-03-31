@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const authRouter = require('./router/authRoute');
+const cors = require('cors');
 //?-L2----------👇👇
 const databaseconnect = require('./config/databaseConfig');
 const cookieParser = require('cookie-parser');
@@ -12,6 +13,8 @@ databaseconnect()
 //?-L2----------👆👆
 
 app.use(express.json())
+
+app.use(cors({ origin: [process.env.CLIENT_URL], credentials: true })); //Third-party middleware
 
 // Middleware to parse cookies attached to the request object
 app.use(cookieParser());//? middleware must be used before your route handlers or middleware that need access to cookies.
